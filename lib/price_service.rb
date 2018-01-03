@@ -1,7 +1,7 @@
 require 'typhoeus'
 
 class PriceService
-  KEY = '6GCV80279I2N8Y5A'
+  KEY = ENV['STOCKSY_KEY']
   FUNCTION = 'TIME_SERIES_DAILY'
   INTERVAL = '1min'
   URL = "https://www.alphavantage.co/query?function=#{FUNCTION}&apikey=#{KEY}&symbol="

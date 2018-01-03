@@ -10,32 +10,20 @@ class StocksControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new" do
-    get new_stock_url
-    assert_response :success
-  end
-
   test "should create stock" do
     assert_difference('Stock.count') do
-      post stocks_url, params: { stock: { last_price: @stock.last_price, portfolio_id: @stock.portfolio_id, price: @stock.price, shares: @stock.shares, symbol: @stock.symbol } }
+      post(
+        stocks_url,
+        params: {
+          stock: {
+            symbol: @stock.symbol,
+            shares: @stock.shares
+          }
+        }
+      )
     end
 
-    assert_redirected_to stock_url(Stock.last)
-  end
-
-  test "should show stock" do
-    get stock_url(@stock)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_stock_url(@stock)
-    assert_response :success
-  end
-
-  test "should update stock" do
-    patch stock_url(@stock), params: { stock: { last_price: @stock.last_price, portfolio_id: @stock.portfolio_id, price: @stock.price, shares: @stock.shares, symbol: @stock.symbol } }
-    assert_redirected_to stock_url(@stock)
+    assert_redirected_to stocks_url
   end
 
   test "should destroy stock" do
