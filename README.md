@@ -31,6 +31,7 @@ gem install bundler
 export STOCKSY_KEY=<API-KEY>
 bundle install
 rake db:setup
+rake test
 rails s
 ```
 

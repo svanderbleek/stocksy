@@ -11,7 +11,8 @@ class StocksController < ApplicationController
     if @stock.save
       redirect_to stocks_url
     else
-      redirect_to stocks_url, notice: @stock.errors.map {|k,v| "#{k} #{v}"}.join(',') + '.'
+      errors = @stock.errors.map {|k,v| "#{k} #{v}"}.join(',') + '.'
+      redirect_to stocks_url, notice: errors.capitalize
     end
   end
 
