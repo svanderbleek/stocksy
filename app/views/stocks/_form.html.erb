@@ -12,11 +12,6 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :portfolio_id %>
-    <%= form.text_field :portfolio_id, id: :stock_portfolio_id %>
-  </div>
-
-  <div class="field">
     <%= form.label :symbol %>
     <%= form.text_field :symbol, id: :stock_symbol %>
   </div>
@@ -24,16 +19,6 @@
   <div class="field">
     <%= form.label :shares %>
     <%= form.number_field :shares, id: :stock_shares %>
-  </div>
-
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.text_field :price, id: :stock_price %>
-  </div>
-
-  <div class="field">
-    <%= form.label :last_price %>
-    <%= form.text_field :last_price, id: :stock_last_price %>
   </div>
 
   <div class="actions">

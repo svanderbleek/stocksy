@@ -1,35 +1,45 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Stocks</h1>
+<h3>Stocks</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Portfolio</th>
-      <th>Symbol</th>
-      <th>Shares</th>
-      <th>Price</th>
-      <th>Last price</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @stocks.each do |stock| %>
+<% if @stocks.any? %>
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= stock.portfolio %></td>
-        <td><%= stock.symbol %></td>
-        <td><%= stock.shares %></td>
-        <td><%= stock.price %></td>
-        <td><%= stock.last_price %></td>
-        <td><%= link_to 'Show', stock %></td>
-        <td><%= link_to 'Edit', edit_stock_path(stock) %></td>
-        <td><%= link_to 'Destroy', stock, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Symbol</th>
+        <th>Shares</th>
+        <th>Price</th>
+        <th>Value</th>
+        <th>Trend</th>
+        <th>Remove</th>
+        <th colspan="1"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @stocks.each do |stock| %>
+        <tr>
+          <td><%= stock.symbol %></td>
+          <td><%= stock.shares %></td>
+          <td><%= stock.price %></td>
+          <td><%= stock.value(none: '-') %></td>
+          <td><%= stock.trend(up: '^', down: 'v', none: '-') %></td>
+          <td><%= link_to 'x', stock, method: :delete, data: { confirm: 'Remove stock?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  Create Stocks!
+<% end %>
 
 <br>
 
-<%= link_to 'New Stock', new_stock_path %>
+<h3>Stock</h3>
+
+<% if @stocks.count < 5 %>
+
+  <%= render 'form', stock: Stock.new %>
+<% else %>
+  Too many Stocks!
+<% end %>

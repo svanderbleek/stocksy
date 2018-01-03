@@ -1,24 +1,38 @@
-# README
+# Stocksy
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Portfolio App
 
-Things you may want to cover:
+## Setup
 
-* Ruby version
+### Ruby
 
-* System dependencies
+Install ruby or
 
-* Configuration
+```
+brew install ruby
+```
 
-* Database creation
+use rbenv to manage rubies
 
-* Database initialization
+```
+brew install rbenv
+rbenv install
+```
 
-* How to run the test suite
+then install bundler
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+gem install bundler
+```
 
-* Deployment instructions
+### Server
 
-* ...
+```
+bundle install
+rake db:setup
+rails s
+```
+
+## Use
+
+Vist `http://localhost:3000/stocks`
