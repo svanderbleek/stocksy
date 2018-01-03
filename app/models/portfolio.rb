@@ -7,7 +7,7 @@ class Portfolio < ApplicationRecord
     first
   end
 
-  def prices
-    stocks.map {|stock| PriceService.read(stock.symbol)}
+  def self.default_channel
+    "portfolio:#{default_portfolio.id}"
   end
 end

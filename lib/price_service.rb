@@ -1,4 +1,4 @@
-require 'httparty'
+require 'typhoeus'
 
 class PriceService
   KEY = '6GCV80279I2N8Y5A'
@@ -8,8 +8,30 @@ class PriceService
   PRICES = "Time Series (Daily)"
   PRICE = "4. close"
 
-  def self.read(symbol)
-    data = JSON.parse(HTTParty.get(URL + symbol).body)
-    data[PRICES][Date.today.to_s][PRICE].to_f
+  def initialize(portfolio)
+    @hydra = Typhoeus::Hydra.new
+    request_prices(portfolio)
+  end
+
+  private
+
+  def request_prices(portfolio)
+    portfolio.stocks.each do |stock|
+      @hydra.queue(price_request(stock))
+    end
+    @hydra.run
+  end
+
+  def price_request(stock)
+    request = Typhoeus::Request.new(URL + stock.symbol)
+    request.on_complete do |response|
+      data = JSON.parse(response.body)
+      price = data[PRICES][Date.today.to_s][PRICE].to_f
+      stock.update(
+        price: price,
+        last_price: stock.price
+      )
+    end
+    request
   end
 end

@@ -7,22 +7,16 @@ class Stock < ApplicationRecord
     Stock.new(stock_params.merge(portfolio: Portfolio.default_portfolio))
   end
 
-  def value(none:)
-    if price? && shares?
-      price * shares
-    else
-      none
-    end
+  def value
+    price * shares if price? && shares?
   end
 
-  def trend(up:, down:, none:)
-    if price? && last_price?
-      if price < last_price
-        down
-      elsif last_price < price
-        up
-      end
+  def trend(up:, down:)
+    return unless price? && last_price?
+    if price < last_price
+      down
+    elsif last_price < price
+      up
     end
-    none
   end
 end

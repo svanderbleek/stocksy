@@ -1,6 +1,6 @@
 class PricesChannel < ApplicationCable::Channel
   def subscribed
-    stream_from Portfolio.default_portfolio.prices
+    stream_from Portfolio.default_channel
   end
 
   def unsubscribed

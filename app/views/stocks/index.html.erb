@@ -16,21 +16,12 @@
       </tr>
     </thead>
 
-    <tbody>
-      <% @stocks.each do |stock| %>
-        <tr>
-          <td><%= stock.symbol %></td>
-          <td><%= stock.shares %></td>
-          <td><%= stock.price %></td>
-          <td><%= stock.value(none: '-') %></td>
-          <td><%= stock.trend(up: '^', down: 'v', none: '-') %></td>
-          <td><%= link_to 'x', stock, method: :delete, data: { confirm: 'Remove stock?' } %></td>
-        </tr>
-      <% end %>
+    <tbody id="stocks-table">
+      <%= render 'table' %>
     </tbody>
   </table>
 <% else %>
-  Create Stocks!
+  <p>Create Stocks!</p>
 <% end %>
 
 <br>
@@ -38,8 +29,7 @@
 <h3>Stock</h3>
 
 <% if @stocks.count < 5 %>
-
   <%= render 'form', stock: Stock.new %>
 <% else %>
-  Too many Stocks!
+  <p>Too many Stocks!</p>
 <% end %>

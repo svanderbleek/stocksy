@@ -1,0 +1,1 @@
+PricesJob.perform_later
